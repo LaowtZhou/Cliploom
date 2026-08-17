@@ -1,0 +1,33 @@
+node_modules/
+dist/
+build/
+out/
+*.log
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+apps/sidecar/dist/
+apps/sidecar/build/
+
+# Electron
+apps/desktop/release/
+apps/desktop/.vite/
+
+# 本地配置与密钥
+.env
+.env.local
+*.pem
+!resources/script_pubkey.example.pem
+legacy/**/.env*
+
+# 下载产物（开发期）
+downloads/
+
+# 卡密明文（含真金白银，严禁提交）
+apps/backend/prisma/seeds/cards-*.txt
