@@ -28,7 +28,7 @@ Cliploom 是我受 Obsidian 启发，从一个抓取视频工具合并为一个�
          分析结果写回软件
 ```
 
-> 本仓库同时支持源码开发版和 Windows x64 安装包。安装包目标为 Windows 10/11；安装包不包含现有视频、数据库、配置文件或 Whisper 模型。
+> 本仓库用于 Cliploom 的 Windows x64 安装包发布说明、版本记录和用户联系信息，不包含用户的视频、文章、数据库、配置文件或 Whisper 模型。安装包目标为 Windows 10/11。
 
 ## 开源协议
 
@@ -44,16 +44,6 @@ Cliploom 使用 MIT License。你可以在遵守许可证条件的前提下自�
 
 如果使用安装包，双击 `Cliploom-1.1.0-setup.exe` 安装后，从开始菜单或桌面快捷方式启动即可。安装包版不需要 Node.js、Python 或项目目录。
 
-如果使用源码开发版，进入项目目录，双击：
-
-```text
-启动视频文案工作台.bat
-```
-
-启动脚本会同时启动桌面界面、下载服务和内容服务。请保留随软件出现的命令行窗口；关闭它会结束开发版软件。
-
-旧的 `启动抖音下载.bat` 和 `启动前后端(开发联调).bat` 也会转到同一个视频文案工作台。
-
 ### 第二步：完成首次设置
 
 打开左侧“设置”，依次确认：
@@ -65,7 +55,7 @@ Cliploom 使用 MIT License。你可以在遵守许可证条件的前提下自�
 5. Whisper 模型建议选择 `medium`，设备建议选择“自动”。
 6. 点击“保存全部设置”。
 
-工作台会优先复用项目目录 `models/<模型名>` 中已经准备好的模型，其次复用当前用户的 Hugging Face 本机缓存。开发版运行环境使用项目根目录 `.venv`，不再依赖项目外的 `transcribe` 目录。
+安装包不内置 Whisper 模型。首次选择本机没有的模型时，软件会按提示下载到当前用户缓存；模型较大，下载和首次加载可能需要一些时间。
 
 ### 第三步：添加视频
 
@@ -538,22 +528,14 @@ Authorization: Bearer <接口中心显示的访问令牌>
 
 ## 13. 常见问题
 
-### 双击启动文件后没有启动
+### 安装后软件无法启动
 
-请在项目目录打开 PowerShell，运行：
+请先确认 Windows 10/11 已完成安装，并从开始菜单或桌面快捷方式启动。若软件仍未打开：
 
-```powershell
-npm run dev
-```
-
-根据错误信息检查：
-
-- 项目目录是否存在 `node_modules`。
-- 电脑是否安装 Node.js。
-- 项目根目录的 `.venv/Scripts/python.exe` 是否存在。
-- 软件或本地接口是否已经在另一个窗口运行。
-
-启动脚本失败时会保留命令行窗口。请不要立即关闭，把窗口中的完整错误信息用于排查。
+1. 重启软件后再次尝试。
+2. 检查 Windows 安全中心或杀毒软件是否拦截了 Cliploom。
+3. 确认安装目录和内容库目录仍然存在且当前用户有读写权限。
+4. 如果问题持续，请在 GitHub 提交 Issue，并附上 Windows 版本、Cliploom 版本和错误截图；不要上传数据库、登录凭据或个人内容。
 
 ### 为什么一直显示“等待转写”
 
@@ -592,48 +574,7 @@ npm run dev
 - 勾选“同时删除本地文件”：文件移入回收站。
 - 不勾选：只清理工作台记录，文件保留。
 
-## 14. 首次配置开发环境
-
-已经可以通过 BAT 正常启动的电脑不需要重复执行本节。
-
-推荐环境：Node.js 20+、pnpm 9+、Python 3.11–3.13。
-
-在项目目录执行：
-
-```powershell
-pnpm install
-
-python -m venv apps/sidecar/.venv
-apps/sidecar/.venv/Scripts/python.exe -m pip install -r apps/sidecar/requirements.txt
-apps/sidecar/.venv/Scripts/python.exe -m playwright install chromium
-
-python -m venv .venv
-.venv/Scripts/python.exe -m pip install -r apps/content-sidecar/requirements.txt
-```
-
-内容服务只使用当前项目根目录 `.venv`。开发版可以复用项目根目录 `models/<模型名>`；安装包不携带模型，首次选择本机没有的模型时会按提示下载到当前用户缓存。
-
-首次升级会幂等读取 `%APPDATA%/transcribe/settings.json`，迁移模型、设备、语言、简繁和 VAD 设置。原设置文件保持不变。
-
-## 15. 开发验证
-
-```powershell
-npm run typecheck
-npm run build:desktop
-npm exec --workspace @dy/desktop -- vitest run
-.venv/Scripts/python.exe -m pytest apps/content-sidecar/test_store_api.py apps/content-sidecar/test_transcribe_core.py -q
-apps/sidecar/.venv/Scripts/python.exe -m pytest apps/sidecar/tests/test_sidecar_lifecycle.py -q
-```
-
-当前版本不包含自动更新、内置大模型、AI API Key 保存、云同步和文案人工编辑。安装包构建命令为：
-
-```powershell
-npm run package:win
-```
-
-输出目录：`apps/desktop/release/`。构建只会把程序组件放入安装包，不会把项目数据库、视频目录、`.venv` 或 `models` 放进去。
-
-## 16. 使用与版权提醒
+## 14. 使用与版权提醒
 
 请只下载自己拥有版权、已经获得授权或法律允许保存的视频。主页抓取和批量下载前需要确认授权声明。软件保留水印的选项默认开启；关闭水印不代表自动获得内容使用权。
 
