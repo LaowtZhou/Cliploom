@@ -30,6 +30,13 @@ Cliploom 是我受 Obsidian 启发，从一个抓取视频工具合并为一个�
 
 > 本仓库用于 Cliploom 的 Windows x64 安装包发布说明、版本记录和用户联系信息，不包含用户的视频、文章、数据库、配置文件或 Whisper 模型。安装包目标为 Windows 10/11。
 
+## 当前下载
+
+- **2.0 Preview 测试版**：[Cliploom 2.0.0-preview.2 安装包](https://github.com/LaowtZhou/Cliploom/releases/download/v2.0.0-preview.2/Cliploom-2.0.0-preview.2-setup.exe) · [版本说明与验收步骤](docs/releases/2.0.0-preview.2.md)
+- **1.1.1 稳定版**：[Cliploom 1.1.1 安装包](https://github.com/LaowtZhou/Cliploom/releases/download/v1.1.1/Cliploom-1.1.1-setup.exe)
+
+`2.0.0-preview.2` 修复了添加视频后需要再次手动启动下载、数据库短暂占用后转写队列停止运行的问题。它是供用户测试的预览版；安装、真实视频下载和模型转写仍需按[验收步骤](docs/releases/2.0.0-preview.2.md)检查。安装包的 SHA-256 为 `32C73CE4F0F851C7618B858E53125BEA6DC7FF0647804673800C719D69F6FEF0`。
+
 ## 开源协议
 
 Cliploom 使用 MIT License。你可以在遵守许可证条件的前提下自由使用、复制、修改、合并、发布、分发、再许可和销售本软件的副本，包括用于个人或商业项目。
@@ -42,7 +49,7 @@ Cliploom 使用 MIT License。你可以在遵守许可证条件的前提下自�
 
 ### 第一步：启动软件
 
-如果使用安装包，双击 `Cliploom-1.1.1-setup.exe` 安装后，从开始菜单或桌面快捷方式启动即可。安装包版不需要 Node.js、Python 或项目目录。
+下载所需版本的安装包，完全退出正在运行的 Cliploom，建议先备份内容库，再双击安装。安装后从开始菜单或桌面快捷方式启动即可。安装包版不需要 Node.js、Python 或项目目录。首次体验 2.0 Preview 请先阅读[版本说明与验收步骤](docs/releases/2.0.0-preview.2.md)。
 
 ### 第二步：完成首次设置
 
@@ -63,7 +70,7 @@ Cliploom 使用 MIT License。你可以在遵守许可证条件的前提下自�
 
 1. 每行粘贴一个链接。
 2. 勾选“我拥有版权或已获得授权”。
-3. 点击“加入工作台”。
+3. 点击“添加并下载”。新任务会立即进入下载队列。
 
 下载完成后，该视频会立即进入转写队列，不需要等其他视频全部下载完。
 
